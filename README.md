@@ -1,69 +1,68 @@
-# Professional Portfolio Website
+# Portfolio Website
 
-A clean, modern portfolio/profile website built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com).
+A modern, fully static portfolio and profile website built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com). The site presents a professional profile — hero, about, skills, experience, projects, education, and contact — in a clean dark-mode design that adapts to any screen size.
 
-The site is a static, content-driven page designed to be easy to extend as more projects, skills, and experience accumulate.
-
-> **Note:** Profile content (name, bio, skills, experience, education, links) is populated from the CV. Project entries are placeholders to be replaced with real repositories from your GitHub account.
+The frontend ships zero client-side JavaScript: every page is pre-rendered to static HTML and styled with Tailwind. Content lives in typed, version-controlled data files, so the site can be maintained and extended without touching layout code. Each merge to `main` is automatically built by GitHub Actions and deployed to an AWS S3 bucket, served globally through CloudFront.
 
 ## Tech stack
 
-- [Astro](https://astro.build) 7 — static site generation
-- [Tailwind CSS](https://tailwindcss.com) 4 — via the official `@tailwindcss/vite` plugin
-- [TypeScript](https://www.typescriptlang.org) — for typed data files and `astro check`
-- Git — version control
+| Layer | Technology |
+| --- | --- |
+| Framework | [Astro](https://astro.build) 7 — static site generation |
+| Styling | [Tailwind CSS](https://tailwindcss.com) 4 via the `@tailwindcss/vite` plugin |
+| Language | [TypeScript](https://www.typescriptlang.org) |
+| Infrastructure | GitHub Actions, AWS S3, AWS CloudFront, AWS IAM (OIDC) |
 
-The site is dark by default. Styling uses Tailwind's `dark:` variant (triggered by the `.dark` class on `<html>`), so a light-mode toggle can be added later without reworking the styles.
+## Features
 
-## Getting started
+- **Data-driven content** — profile, skills, experience, education, and projects are declared in typed files under `src/data/`; the page renders them automatically. Updating a project or role never requires editing markup.
+- **Conditional project links** — a project card shows a *Source* (and optional *Live demo*) link only when the matching URL is present, so repositories that are not public are never linked by mistake.
+- **Dark mode by default** — built on Tailwind's class-based `dark:` variant, so a light-mode toggle can be added later without reworking styles.
+- **Accessible and responsive** — semantic landmarks, skip-to-content link, visible focus rings, `prefers-reduced-motion` support, and layouts that scale from mobile to desktop.
+- **Fast by default** — no runtime JavaScript, pre-rendered HTML, and a single optimised stylesheet.
 
-```bash
-# Install dependencies
-npm install
+## Local development
 
-# Start the development server (http://localhost:4321)
-npm run dev
+Prerequisites: [Node.js](https://nodejs.org) 20 or later.
 
-# Type-check the project
-npm run check
-
-# Build a production bundle into dist/
-npm run build
-
-# Preview the production build locally
-npm run preview
-```
+| Command | Description |
+| --- | --- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start the development server at http://localhost:4321 |
+| `npm run build` | Build the production site into `dist/` |
+| `npm run preview` | Serve the production build locally |
+| `npm run check` | Type-check the project (`astro check`) |
 
 ## Project structure
 
 ```
 src/
-  components/    Reusable UI pieces (header, footer, section, project card, icons)
-  data/          Site content, kept separate from presentation
-  layouts/       Page shell (head, header, footer, skip link)
-  pages/         Route pages (index.astro)
-  styles/        Global CSS + Tailwind entry point
-  types/         Shared TypeScript types
-public/          Static assets (favicon)
+  components/   Reusable UI components (header, footer, section, cards, icons)
+  data/         Site content, kept separate from presentation
+  layouts/      Page shell (head, header, footer, skip link)
+  pages/        Route pages (index.astro)
+  styles/       Global CSS and Tailwind entry point
+  types/        Shared TypeScript types for content and component props
+public/         Static assets (favicon)
+.github/
+  workflows/    CI/CD pipeline — build the site and deploy it to AWS
 ```
 
-## Adding your own content
+## Managing content
 
-Content is kept separate from markup so you can update the site without touching layout code.
+All page content is configured through the data layer, so routine updates are plain text edits.
 
-| What you want to change | File |
+| Content | File |
 | --- | --- |
-| Name, role, tagline, bio, email, social links | `src/data/site.ts` |
+| Profile (name, role, tagline, bio, contact links) | `src/data/site.ts` |
 | Skills and technologies | `src/data/skills.ts` |
-| Experience | `src/data/experience.ts` |
+| Professional experience | `src/data/experience.ts` |
 | Education and certifications | `src/data/education.ts` |
 | Projects | `src/data/projects.ts` |
-| Status colours / card markup | `src/components/ProjectCard.astro` |
-| Experience card markup | `src/components/ExperienceCard.astro` |
 
 ### Adding a project
 
-Each project in `src/data/projects.ts` follows the `Project` type in `src/types/index.ts`:
+Project entries follow the `Project` type in `src/types/index.ts`:
 
 ```ts
 {
@@ -76,8 +75,15 @@ Each project in `src/data/projects.ts` follows the `Project` type in `src/types/
 }
 ```
 
-A card only shows a **Source** link when `githubUrl` is present; otherwise it shows a **Private** indicator. Omit `demoUrl` when a project has no live demo.
+A card renders a **Source** link only when `githubUrl` is set; otherwise it shows a **Private** indicator. `demoUrl` drives the optional **Live demo** link.
 
 ## Deployment
 
-The build output is static HTML/CSS in `dist/`, so the site can be hosted anywhere that serves static files (GitHub Pages, Netlify, Vercel, an S3 bucket, etc.). No server runtime or environment variables are required.
+Continuous deployment is defined in `.github/workflows/deploy.yml`. On every push to the `main` branch, the pipeline:
+
+1. Installs dependencies with `npm ci` and builds the site with `npm run build`.
+2. Assumes an AWS IAM role using GitHub's OIDC integration, so no long-lived credentials are stored in the repository.
+3. Syncs the `dist/` output to the S3 bucket with `aws s3 sync`, removing files that no longer exist in the build.
+4. Creates a CloudFront invalidation so edge caches immediately serve the new build.
+
+All infrastructure runs in the AWS **eu-north-1** region. The S3 bucket and CloudFront distribution are managed directly in AWS; this repository contains only the source code and the deployment pipeline.
