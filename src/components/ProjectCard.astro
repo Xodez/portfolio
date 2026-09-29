@@ -14,41 +14,45 @@ const statusStyles: Record<
 > = {
   active: {
     label: "Active",
-    classes: "bg-emerald-50 text-emerald-700 ring-emerald-600/20",
+    classes:
+      "bg-emerald-50 text-emerald-700 ring-emerald-600/20 dark:bg-emerald-400/10 dark:text-emerald-300 dark:ring-emerald-400/20",
   },
   "in-progress": {
     label: "In progress",
-    classes: "bg-amber-50 text-amber-700 ring-amber-600/20",
+    classes:
+      "bg-amber-50 text-amber-700 ring-amber-600/20 dark:bg-amber-400/10 dark:text-amber-300 dark:ring-amber-400/20",
   },
   planned: {
     label: "Planned",
-    classes: "bg-sky-50 text-sky-700 ring-sky-600/20",
+    classes:
+      "bg-sky-50 text-sky-700 ring-sky-600/20 dark:bg-sky-400/10 dark:text-sky-300 dark:ring-sky-400/20",
   },
   archived: {
     label: "Archived",
-    classes: "bg-slate-100 text-slate-600 ring-slate-500/20",
+    classes:
+      "bg-slate-100 text-slate-600 ring-slate-500/20 dark:bg-slate-400/10 dark:text-slate-300 dark:ring-slate-400/20",
   },
 };
 
 const status = statusStyles[project.status];
 ---
 
-<article class="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md">
+<article class="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700">
   <div class="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
-    <h3 class="text-lg font-semibold text-slate-900">{project.name}</h3>
+    <h3 class="text-lg font-semibold text-slate-900 dark:text-white">{project.name}</h3>
     <span
       class={`inline-flex shrink-0 items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${status.classes}`}
     >
       {status.label}
     </span>
   </div>
-  <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-600">{project.description}</p>
+  <p class="mt-3 flex-1 text-base leading-relaxed text-slate-600 dark:text-slate-300">{project.description}</p>
   {
     project.technologies.length > 0 && (
       <ul class="mt-4 flex flex-wrap gap-2" aria-label="Technologies used">
         {
           project.technologies.map((tech) => (
-            <li class="rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700">
+            <li class="rounded-md bg-slate-100 px-2.5 py-1 text-sm font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">
               {tech}
             </li>
           ))
@@ -56,14 +60,14 @@ const status = statusStyles[project.status];
       </ul>
     )
   }
-  <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-100 pt-4 text-sm">
+  <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-slate-100 pt-4 text-sm dark:border-slate-800">
     {
       project.githubUrl ? (
         <a
           href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-indigo-600"
+          class="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400"
         >
           <Icon name="github" class="h-4 w-4" />
           Source
@@ -71,7 +75,7 @@ const status = statusStyles[project.status];
         </a>
       ) : (
         <span
-          class="inline-flex items-center gap-1.5 text-slate-500"
+          class="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400"
           title="Source code is not publicly available"
         >
           <Icon name="github" class="h-4 w-4" />
@@ -85,7 +89,7 @@ const status = statusStyles[project.status];
           href={project.demoUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-indigo-600"
+          class="inline-flex items-center gap-1.5 font-medium text-slate-700 hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400"
         >
           Live demo
           <Icon name="external" class="h-3.5 w-3.5" />

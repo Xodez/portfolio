@@ -4,7 +4,7 @@ A clean, modern portfolio/profile website built with [Astro](https://astro.build
 
 The site is a static, content-driven page designed to be easy to extend as more projects, skills, and experience accumulate.
 
-> **Note:** Profile content (name, bio, skills, experience, education, links) is  populated from the CV. Project entries are a starting point — source and demo links are only shown once they are publicly available.
+> **Note:** Profile content (name, bio, skills, experience, education, links) is populated from the CV. Project entries are placeholders to be replaced with real repositories from your GitHub account.
 
 ## Tech stack
 
@@ -12,6 +12,8 @@ The site is a static, content-driven page designed to be easy to extend as more 
 - [Tailwind CSS](https://tailwindcss.com) 4 — via the official `@tailwindcss/vite` plugin
 - [TypeScript](https://www.typescriptlang.org) — for typed data files and `astro check`
 - Git — version control
+
+The site is dark by default. Styling uses Tailwind's `dark:` variant (triggered by the `.dark` class on `<html>`), so a light-mode toggle can be added later without reworking the styles.
 
 ## Getting started
 

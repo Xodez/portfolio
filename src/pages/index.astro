@@ -16,20 +16,27 @@ import { projects } from "../data/projects";
   description={site.tagline}
 >
   <!-- Hero -->
-  <section id="top" class="scroll-mt-24">
-    <div class="mx-auto max-w-3xl px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:px-8">
-      <p class="text-sm font-semibold uppercase tracking-widest text-indigo-600">
+  <section
+    id="top"
+    class="scroll-mt-24 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950"
+  >
+    <div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <p class="text-sm font-semibold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
         Portfolio
       </p>
-      <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-        Hi, I&rsquo;m <span class="text-indigo-600">{site.name}</span>
+      <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl dark:text-white">
+        Hi, I&rsquo;m <span class="text-indigo-600 dark:text-indigo-400">{site.name}</span>
       </h1>
-      <p class="mt-4 text-xl font-medium text-slate-900">{site.role}</p>
-      <p class="mt-4 leading-relaxed text-slate-600">{site.tagline}</p>
-      <div class="mt-8 flex flex-wrap gap-3">
+      <p class="mt-5 text-xl font-medium text-slate-900 sm:text-2xl dark:text-slate-100">
+        {site.role}
+      </p>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+        {site.tagline}
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3">
         <a
           href="#projects"
-          class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+          class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-500"
         >
           View projects
         </a>
@@ -37,9 +44,9 @@ import { projects } from "../data/projects";
           href={site.socials.github.href}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 hover:border-slate-400 hover:text-slate-900"
+          class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 hover:border-slate-400 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-slate-600 dark:hover:text-white"
         >
-          <Icon name="github" class="h-4 w-4" />
+          <Icon name="github" class="h-5 w-5" />
           GitHub profile
         </a>
       </div>
@@ -48,7 +55,7 @@ import { projects } from "../data/projects";
 
   <!-- About -->
   <Section id="about" kicker="About" title="About me" description={site.bio[0]}>
-    <div class="space-y-4 text-slate-600">
+    <div class="space-y-4 text-slate-600 dark:text-slate-400">
       {
         site.bio.slice(1).map((paragraph) => (
           <p>{paragraph}</p>
@@ -64,18 +71,19 @@ import { projects } from "../data/projects";
     title="Skills & technologies"
     description="The languages, tools, and practices I work with across development, data, QA, and cloud."
     wide
+    tint
   >
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
       {
         skillGroups.map((group) => (
           <div>
-            <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-900">
+            <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-900 dark:text-slate-200">
               {group.category}
             </h3>
             <ul class="mt-4 flex flex-wrap gap-2">
               {
                 group.skills.map((skill) => (
-                  <li class="rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-sm text-slate-700">
+                  <li class="rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
                     {skill}
                   </li>
                 ))
@@ -111,8 +119,9 @@ import { projects } from "../data/projects";
     id="projects"
     kicker="Portfolio"
     title="Projects"
-    description="A selection of my work. Source and demo links appear once they are publicly available."
+    description="A growing showcase of my work. Cards show a source link once a repository becomes public."
     wide
+    tint
   >
     <ul class="grid gap-6 sm:grid-cols-2">
       {
@@ -123,13 +132,13 @@ import { projects } from "../data/projects";
         ))
       }
     </ul>
-    <p class="mt-8 text-sm text-slate-500">
+    <p class="mt-8 text-sm text-slate-500 dark:text-slate-400">
       More projects are on the way. Follow along on
       <a
         href={site.socials.github.href}
         target="_blank"
         rel="noopener noreferrer"
-        class="font-medium text-slate-700 underline decoration-slate-300 underline-offset-2 hover:text-indigo-600"
+        class="font-medium text-slate-700 underline decoration-slate-300 underline-offset-2 hover:text-indigo-600 dark:text-slate-300 dark:decoration-slate-600 dark:hover:text-indigo-400"
       >
         GitHub
       </a>
@@ -146,14 +155,14 @@ import { projects } from "../data/projects";
     <ol class="space-y-4">
       {
         education.map((item) => (
-          <li class="flex flex-col gap-1 rounded-2xl border border-slate-200 bg-white p-6 sm:flex-row sm:items-baseline sm:justify-between">
+          <li class="flex flex-col gap-1 rounded-2xl border border-slate-200 bg-white p-6 sm:flex-row sm:items-baseline sm:justify-between dark:border-slate-800 dark:bg-slate-900">
             <div>
-              <h3 class="text-base font-semibold text-slate-900">{item.qualification}</h3>
-              <p class="mt-1 text-sm text-slate-600">
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">{item.qualification}</h3>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">
                 {item.institution}{item.details ? ` — ${item.details}` : ""}
               </p>
             </div>
-            <p class="shrink-0 text-sm font-medium text-slate-500">{item.period}</p>
+            <p class="shrink-0 text-sm font-medium text-slate-500 dark:text-slate-400">{item.period}</p>
           </li>
         ))
       }
@@ -171,9 +180,9 @@ import { projects } from "../data/projects";
       <li>
         <a
           href={`mailto:${site.email}`}
-          class="inline-flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+          class="inline-flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
         >
-          <Icon name="mail" class="h-5 w-5 text-slate-400" />
+          <Icon name="mail" class="h-5 w-5 text-slate-400 dark:text-slate-500" />
           <span>{site.email}</span>
         </a>
       </li>
@@ -182,9 +191,9 @@ import { projects } from "../data/projects";
           href={site.socials.github.href}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+          class="inline-flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
         >
-          <Icon name="github" class="h-5 w-5 text-slate-400" />
+          <Icon name="github" class="h-5 w-5 text-slate-400 dark:text-slate-500" />
           <span>{site.socials.github.href.replace(/^https?:\/\//, "")}</span>
         </a>
       </li>
@@ -193,13 +202,13 @@ import { projects } from "../data/projects";
           href={site.socials.linkedin.href}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+          class="inline-flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-white"
         >
-          <Icon name="linkedin" class="h-5 w-5 text-slate-400" />
+          <Icon name="linkedin" class="h-5 w-5 text-slate-400 dark:text-slate-500" />
           <span>{site.socials.linkedin.href.replace(/^https?:\/\//, "")}</span>
         </a>
       </li>
     </ul>
-    <p class="mt-6 text-sm text-slate-500">Based in {site.location}.</p>
+    <p class="mt-6 text-sm text-slate-500 dark:text-slate-400">Based in {site.location}.</p>
   </Section>
 </BaseLayout>
