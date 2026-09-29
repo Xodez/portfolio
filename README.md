@@ -4,7 +4,7 @@ A clean, modern portfolio/profile website built with [Astro](https://astro.build
 
 The site is a static, content-driven page designed to be easy to extend as more projects, skills, and experience accumulate.
 
-> **Note:** All personal content — name, bio, skills, project list, and links — is currently placeholder data. Replace it with your own information before publishing.
+> **Note:** Profile content (name, bio, skills, experience, education, links) is  populated from the CV. Project entries are a starting point — source and demo links are only shown once they are publicly available.
 
 ## Tech stack
 
@@ -53,8 +53,11 @@ Content is kept separate from markup so you can update the site without touching
 | --- | --- |
 | Name, role, tagline, bio, email, social links | `src/data/site.ts` |
 | Skills and technologies | `src/data/skills.ts` |
+| Experience | `src/data/experience.ts` |
+| Education and certifications | `src/data/education.ts` |
 | Projects | `src/data/projects.ts` |
 | Status colours / card markup | `src/components/ProjectCard.astro` |
+| Experience card markup | `src/components/ExperienceCard.astro` |
 
 ### Adding a project
 
