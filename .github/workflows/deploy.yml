@@ -13,6 +13,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      BUCKET: kasparas-portfolio-2026-888425712638-eu-north-1-an
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -29,14 +32,42 @@ jobs:
       - name: Build Astro site
         run: npm run build
 
+      - name: Compute build hash
+        id: hash
+        run: |
+          HASH=$(find dist -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | cut -d ' ' -f1)
+          echo "hash=$HASH" >> "$GITHUB_OUTPUT"
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::888425712638:role/github-cicd
           aws-region: eu-north-1
 
+      - name: Fetch previous build hash
+        id: previous
+        run: |
+          PREV=$(aws s3 cp "s3://$BUCKET/.portfolio-hash" - 2>/dev/null || true)
+          echo "hash=$PREV" >> "$GITHUB_OUTPUT"
+
+      - name: Check whether the build changed
+        id: changed
+        run: |
+          if [ "${{ steps.hash.outputs.hash }}" = "${{ steps.previous.outputs.hash }}" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Deploy to S3
-        run: aws s3 sync dist/ s3://kasparas-portfolio-2026-888425712638-eu-north-1-an --delete
+        if: steps.changed.outputs.changed == 'true'
+        run: aws s3 sync dist/ "s3://$BUCKET" --delete --exclude ".portfolio-hash"
 
       - name: Invalidate CloudFront
+        if: steps.changed.outputs.changed == 'true'
         run: aws cloudfront create-invalidation --distribution-id E337I7I1O63VUQ --paths "/*"
+
+      - name: Update stored build hash
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          echo "${{ steps.hash.outputs.hash }}" | aws s3 cp - "s3://$BUCKET/.portfolio-hash"

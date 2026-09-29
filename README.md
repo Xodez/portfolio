@@ -82,8 +82,8 @@ A card renders a **Source** link only when `githubUrl` is set; otherwise it show
 Continuous deployment is defined in `.github/workflows/deploy.yml`. On every push to the `main` branch, the pipeline:
 
 1. Installs dependencies with `npm ci` and builds the site with `npm run build`.
-2. Assumes an AWS IAM role using GitHub's OIDC integration, so no long-lived credentials are stored in the repository.
-3. Syncs the `dist/` output to the S3 bucket with `aws s3 sync`, removing files that no longer exist in the build.
-4. Creates a CloudFront invalidation so edge caches immediately serve the new build.
+2. Computes a content hash of the `dist/` output and compares it with the hash stored in the bucket from the previous deployment.
+3. Assumes an AWS IAM role using GitHub's OIDC integration, so no long-lived credentials are stored in the repository.
+4. Only when the build has actually changed: syncs `dist/` to the S3 bucket with `aws s3 sync` (removing files that no longer exist), creates a CloudFront invalidation so edge caches immediately serve the new build, and records the new build hash. Unchanged builds skip all three, leaving the bucket and edge caches untouched.
 
 All infrastructure runs in the AWS **eu-north-1** region. The S3 bucket and CloudFront distribution are managed directly in AWS; this repository contains only the source code and the deployment pipeline.
