@@ -1,5 +1,8 @@
 // ---------------------------------------------------------------------------
-// Project list, drawn from the CV and interests.
+// Project list.
+//
+// These are placeholder entries to be replaced with real repositories from
+// your GitHub account as they become available.
 //
 // - Leave `githubUrl` out for projects whose source is not (yet) public.
 //   Cards only show a "Source" link when this field is present.
@@ -10,17 +13,26 @@ import type { Project } from "../types";
 
 export const projects: Project[] = [
   {
-    name: "AI-powered Android inventory app",
+    name: "Sample project one",
     description:
-      "A personal project that combines image recognition and structured data extraction to capture inventory items, with validation built into the workflow. Built to explore AI-assisted development end to end.",
-    technologies: ["Kotlin", "Android", "AI", "Data validation"],
-    status: "in-progress",
+      "Placeholder entry — replace this with a real repository from GitHub. It demonstrates a card with an active status and a source link.",
+    technologies: ["TypeScript", "Astro"],
+    status: "active",
+    githubUrl: "https://github.com/Xodez/sample-project-one",
   },
   {
-    name: "Gallery database migration",
+    name: "Sample project two",
     description:
-      "Led the migration of around 3,000 records from a legacy Linux SQL database to the Artlogic art management platform, automating extraction, transformation, cleansing, and validation with Python scripts and Excel templates.",
-    technologies: ["Python", "SQL", "Data migration", "Linux"],
-    status: "active",
+      "Placeholder entry — replace this with an in-progress repository. The source link will appear once githubUrl is set.",
+    technologies: ["Python", "Flask"],
+    status: "in-progress",
+    githubUrl: "https://github.com/Xodez/sample-project-two",
+  },
+  {
+    name: "Sample project three",
+    description:
+      "Placeholder entry for a planned project with no public repository yet. Cards with no githubUrl show a Private indicator instead of a link.",
+    technologies: ["Kotlin", "Android"],
+    status: "planned",
   },
 ];
