@@ -1,0 +1,29 @@
+---
+interface Props {
+  /** Unique anchor used by the section links in the nav. */
+  id: string;
+  title: string;
+  kicker?: string;
+  description?: string;
+  /** Use a wider container for content such as project cards. */
+  wide?: boolean;
+}
+
+const { id, title, kicker, description, wide = false } = Astro.props;
+const containerClass = wide ? "max-w-5xl" : "max-w-3xl";
+---
+
+<section id={id} class="scroll-mt-24">
+  <div class={`mx-auto px-4 sm:px-6 lg:px-8 ${containerClass}`}>
+    {kicker && (
+      <p class="text-sm font-semibold uppercase tracking-widest text-indigo-600">
+        {kicker}
+      </p>
+    )}
+    <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900">{title}</h2>
+    {description && <p class="mt-3 text-lg leading-relaxed text-slate-600">{description}</p>}
+    <div class="mt-10">
+      <slot />
+    </div>
+  </div>
+</section>

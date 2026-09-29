@@ -1,15 +1,127 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
+import { skillGroups } from "../data/skills";
 ---
 
-<BaseLayout title={`${site.name} — ${site.role}`} description={site.tagline}>
+<BaseLayout
+  title={`${site.name} — ${site.role}`}
+  description={site.tagline}
+>
+  <!-- Hero -->
   <section id="top" class="scroll-mt-24">
     <div class="mx-auto max-w-3xl px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:px-8">
-      <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-        {site.name}
+      <p class="text-sm font-semibold uppercase tracking-widest text-indigo-600">
+        Portfolio
+      </p>
+      <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+        Hi, I&rsquo;m <span class="text-indigo-600">{site.name}</span>
       </h1>
       <p class="mt-4 text-xl font-medium text-slate-900">{site.role}</p>
+      <p class="mt-4 leading-relaxed text-slate-600">{site.tagline}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href="#projects"
+          class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+        >
+          View projects
+        </a>
+        <a
+          href={site.socials.github.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 hover:border-slate-400 hover:text-slate-900"
+        >
+          <Icon name="github" class="h-4 w-4" />
+          GitHub profile
+        </a>
+      </div>
     </div>
   </section>
+
+  <!-- About -->
+  <Section id="about" kicker="About" title="About me" description={site.bio[0]}>
+    <div class="space-y-4 text-slate-600">
+      {
+        site.bio.slice(1).map((paragraph) => (
+          <p>{paragraph}</p>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- Skills -->
+  <Section
+    id="skills"
+    kicker="Skills"
+    title="Skills & technologies"
+    description="A few of the languages, frameworks, and tools I work with. This list will grow as my experience does."
+    wide
+  >
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        skillGroups.map((group) => (
+          <div>
+            <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-900">
+              {group.category}
+            </h3>
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {
+                group.skills.map((skill) => (
+                  <li class="rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-sm text-slate-700">
+                    {skill}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- Contact -->
+  <Section
+    id="contact"
+    kicker="Contact"
+    title="Get in touch"
+    description="Interested in collaborating or just want to say hello? Reach out through any of the channels below."
+  >
+    <ul class="space-y-3">
+      <li>
+        <a
+          href={`mailto:${site.email}`}
+          class="inline-flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+        >
+          <Icon name="mail" class="h-5 w-5 text-slate-400" />
+          <span>{site.email}</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href={site.socials.github.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+        >
+          <Icon name="github" class="h-5 w-5 text-slate-400" />
+          <span>{site.socials.github.href.replace(/^https?:\/\//, "")}</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href={site.socials.linkedin.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+        >
+          <Icon name="linkedin" class="h-5 w-5 text-slate-400" />
+          <span>{site.socials.linkedin.href.replace(/^https?:\/\//, "")}</span>
+        </a>
+      </li>
+    </ul>
+    <p class="mt-6 text-sm text-slate-500">Based in {site.location}.</p>
+  </Section>
 </BaseLayout>
