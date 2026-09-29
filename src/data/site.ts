@@ -1,38 +1,39 @@
 // ---------------------------------------------------------------------------
-// Personal profile content.
-// Everything in this file is placeholder data — replace it with your own
-// information before publishing the site.
+// Personal profile content, drawn from the CV.
+// Replace or extend this file as your details change over time.
 // ---------------------------------------------------------------------------
 
 export const site = {
-  name: "Your Name",
+  name: "Kasparas Skruibis",
   role: "Software Developer",
   tagline:
-    "I build clean, accessible, and maintainable software — from polished interfaces to robust backend services.",
+    "Software developer focused on clean, reliable systems, with hands-on experience in data migration, QA automation, and AWS cloud support.",
   bio: [
-    "I am a software developer who enjoys turning ideas into reliable, well-structured applications. I care about clean code, thoughtful design, and building things that are a pleasure to use.",
-    "This site is a growing home for my profile and projects. Check back as I publish more work over time.",
+    "Software development graduate with experience spanning software engineering, data management, technical support, and quality assurance. I have led a large-scale database migration, supported high-end technical operations, and tested software across web and mobile platforms.",
+    "Building on a strong technical foundation, I recently completed an AWS Cloud Support Engineer training programme covering Linux administration, networking, and core AWS services. I am currently developing a career as a Cloud Engineer, applying my development and support experience in cloud environments.",
   ],
-  email: "you@example.com",
-  location: "Your City, Your Country",
+  email: "kasparasskruibis@gmail.com",
+  location: "Cork City, Ireland",
   socials: {
     github: {
       label: "GitHub",
-      href: "https://github.com/your-github-username",
+      href: "https://github.com/Xodez",
     },
     linkedin: {
       label: "LinkedIn",
-      href: "https://www.linkedin.com/in/your-linkedin-username",
+      href: "https://www.linkedin.com/in/kasparas-skruibis/",
     },
   },
   nav: [
     { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
+    { label: "Experience", href: "#experience" },
     { label: "Projects", href: "#projects" },
+    { label: "Education", href: "#education" },
     { label: "Contact", href: "#contact" },
   ],
 } as const;
 
-export const siteTitle = "Software Developer Portfolio";
+export const siteTitle = "Kasparas Skruibis — Software Developer";
 export const siteDescription =
-  "Personal website and portfolio of a software developer. Projects, skills, and ways to get in touch.";
+  "Portfolio of Kasparas Skruibis — software developer experienced in data migration, QA automation, and cloud support.";
