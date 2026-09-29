@@ -1,11 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Section from "../components/Section.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ExperienceCard from "../components/ExperienceCard.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
 import { skillGroups } from "../data/skills";
+import { experience } from "../data/experience";
+import { education } from "../data/education";
 import { projects } from "../data/projects";
-import ProjectCard from "../components/ProjectCard.astro";
 ---
 
 <BaseLayout
@@ -59,7 +62,7 @@ import ProjectCard from "../components/ProjectCard.astro";
     id="skills"
     kicker="Skills"
     title="Skills & technologies"
-    description="A few of the languages, frameworks, and tools I work with. This list will grow as my experience does."
+    description="The languages, tools, and practices I work with across development, data, QA, and cloud."
     wide
   >
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -84,15 +87,34 @@ import ProjectCard from "../components/ProjectCard.astro";
     </div>
   </Section>
 
+  <!-- Experience -->
+  <Section
+    id="experience"
+    kicker="Career"
+    title="Experience"
+    description="A blend of software development, data management, QA, and cloud support roles."
+    wide
+  >
+    <ol class="space-y-6">
+      {
+        experience.map((item) => (
+          <li>
+            <ExperienceCard experience={item} />
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
   <!-- Projects -->
   <Section
     id="projects"
     kicker="Portfolio"
     title="Projects"
-    description="A selection of my work. Project cards show a source link only when the repository is public."
+    description="A selection of my work. Source and demo links appear once they are publicly available."
     wide
   >
-    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="grid gap-6 sm:grid-cols-2">
       {
         projects.map((project) => (
           <li>
@@ -113,6 +135,29 @@ import ProjectCard from "../components/ProjectCard.astro";
       </a>
       .
     </p>
+  </Section>
+
+  <!-- Education -->
+  <Section
+    id="education"
+    kicker="Education"
+    title="Education & certifications"
+  >
+    <ol class="space-y-4">
+      {
+        education.map((item) => (
+          <li class="flex flex-col gap-1 rounded-2xl border border-slate-200 bg-white p-6 sm:flex-row sm:items-baseline sm:justify-between">
+            <div>
+              <h3 class="text-base font-semibold text-slate-900">{item.qualification}</h3>
+              <p class="mt-1 text-sm text-slate-600">
+                {item.institution}{item.details ? ` — ${item.details}` : ""}
+              </p>
+            </div>
+            <p class="shrink-0 text-sm font-medium text-slate-500">{item.period}</p>
+          </li>
+        ))
+      }
+    </ol>
   </Section>
 
   <!-- Contact -->

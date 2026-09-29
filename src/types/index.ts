@@ -16,4 +16,20 @@ export interface SkillGroup {
   skills: string[];
 }
 
+export interface Experience {
+  role: string;
+  organization: string;
+  period: string;
+  location: string;
+  summary: string;
+  highlights: string[];
+}
+
+export interface Education {
+  qualification: string;
+  institution: string;
+  period: string;
+  details?: string;
+}
+
 export type IconName = "github" | "linkedin" | "mail" | "external";

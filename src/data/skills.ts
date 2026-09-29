@@ -1,6 +1,5 @@
 // ---------------------------------------------------------------------------
-// Skills and technologies, grouped by category.
-// Placeholder data — replace with the technologies you actually use.
+// Skills and technologies, grouped by category, drawn from the CV.
 // ---------------------------------------------------------------------------
 
 import type { SkillGroup } from "../types";
@@ -8,22 +7,22 @@ import type { SkillGroup } from "../types";
 export const skillGroups: SkillGroup[] = [
   {
     category: "Languages",
-    skills: ["TypeScript", "JavaScript", "Python", "HTML", "CSS"],
-  },
-  {
-    category: "Frontend",
-    skills: ["Astro", "React", "Tailwind CSS", "Vite"],
-  },
-  {
-    category: "Backend",
-    skills: ["Node.js", "REST APIs", "PostgreSQL", "SQLite"],
+    skills: ["Python", "Java", "C#", "Kotlin", "C", "SQL"],
   },
   {
     category: "Cloud & DevOps",
-    skills: ["AWS", "Docker", "GitHub Actions", "Linux"],
+    skills: ["AWS", "Linux", "Networking", "CI/CD"],
   },
   {
-    category: "Tools",
-    skills: ["Git", "VS Code", "npm", "Figma"],
+    category: "Data & Databases",
+    skills: ["Data migration", "Data validation", "SQL", "Excel/VBA"],
+  },
+  {
+    category: "Testing & QA",
+    skills: ["Test automation", "Test planning", "JIRA", "Edge-case testing"],
+  },
+  {
+    category: "Development Practice",
+    skills: ["Git", "AI-assisted development", "Debugging", "Troubleshooting"],
   },
 ];
