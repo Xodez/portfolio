@@ -4,6 +4,8 @@ import Section from "../components/Section.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
 import { skillGroups } from "../data/skills";
+import { projects } from "../data/projects";
+import ProjectCard from "../components/ProjectCard.astro";
 ---
 
 <BaseLayout
@@ -80,6 +82,37 @@ import { skillGroups } from "../data/skills";
         ))
       }
     </div>
+  </Section>
+
+  <!-- Projects -->
+  <Section
+    id="projects"
+    kicker="Portfolio"
+    title="Projects"
+    description="A selection of my work. Project cards show a source link only when the repository is public."
+    wide
+  >
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        projects.map((project) => (
+          <li>
+            <ProjectCard project={project} />
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-8 text-sm text-slate-500">
+      More projects are on the way. Follow along on
+      <a
+        href={site.socials.github.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-medium text-slate-700 underline decoration-slate-300 underline-offset-2 hover:text-indigo-600"
+      >
+        GitHub
+      </a>
+      .
+    </p>
   </Section>
 
   <!-- Contact -->
