@@ -9,8 +9,8 @@ export const site = {
   tagline:
     "Software developer focused on clean, reliable systems, with hands-on experience in data migration, QA automation, and AWS cloud support.",
   bio: [
-    "Software development graduate with experience spanning software engineering, data management, technical support, and quality assurance. I have led a large-scale database migration, supported high-end technical operations, and tested software across web and mobile platforms.",
-    "Building on a strong technical foundation, I recently completed an AWS Cloud Support Engineer training programme covering Linux administration, networking, and core AWS services. I am currently developing a career as a Cloud Engineer, applying my development and support experience in cloud environments.",
+    "Cloud-focused software developer with an AWS Certified Cloud Practitioner credential and hands-on training in Linux administration, networking, and core AWS services.",
+    "I recently completed a Cloud Support Engineer training programme, where I built practical skills administering Linux systems, troubleshooting connectivity, and working with AWS infrastructure. Combined with a software development background spanning data migration, QA, and technical support, I am building toward a career as a Cloud Engineer — and the projects here reflect that focus, from cloud-ready tooling to this site's end-to-end AWS setup.",
   ],
   email: "kasparasskruibis@gmail.com",
   location: "Cork City, Ireland",
